@@ -22,7 +22,7 @@ class FS200AC {
     FS200AC(SerialProvider &serial);
     ~FS200AC();
     bool initialize(ControlsState &controls, const ConsoleState &initial_state = DEFAULT_INITIAL_STATE);
-    bool poll(uint8_t &roll, uint8_t &pitch, uint8_t &yaw, Event &event);
+    bool poll(int8_t &roll, int8_t &pitch, int8_t &yaw, Event &event);
 
     enum EventType {
         None,

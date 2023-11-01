@@ -184,7 +184,7 @@ int main(int argc, char *argv[]) {
     bool done = false;
     FS200AC::Event event;
     while (!done) {
-        uint8_t roll, pitch, yaw;
+        int8_t roll, pitch, yaw;
         if (!fs.poll(roll, pitch, yaw, event)) {
             return 1;
         }

@@ -345,7 +345,7 @@ void FS200AC::fill_event(Event &event, uint8_t id, uint8_t b2, uint8_t b3) {
     }
 }
 
-bool FS200AC::poll(uint8_t &roll, uint8_t &pitch, uint8_t &yaw, Event &event) {
+bool FS200AC::poll(int8_t &roll, int8_t &pitch, int8_t &yaw, Event &event) {
     if (!wait_on_code(0xa5, 100)) {
         return false;
     }
@@ -363,9 +363,9 @@ bool FS200AC::poll(uint8_t &roll, uint8_t &pitch, uint8_t &yaw, Event &event) {
     if (!write_byte(CODE_ACKNOWLEDGE)) {
         return false;
     }
-    roll = (buff[0] & 2) ? -buff[2] : buff[2];
-    pitch = (buff[0] & 1) ? -buff[1] : buff[1];
-    yaw = (buff[0] & 4) ? -buff[3] : buff[3];
+    roll = (int8_t)((buff[0] & 2) ? -buff[2] : buff[2]);
+    pitch = (int8_t)((buff[0] & 1) ? -buff[1] : buff[1]);
+    yaw = (int8_t)((buff[0] & 4) ? -buff[3] : buff[3]);
     fill_event(event, buff[4], buff[5], buff[6]);
     return true;
 }
