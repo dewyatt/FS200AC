@@ -57,6 +57,9 @@ class FS200AC {
     };
 
     // stateful controls (not incl. carb heat and cowl flap) 
+    #ifdef _MSC_VER
+    #pragma pack(push, 1)
+    #endif
     struct ControlsState {
         uint8_t nav1_on, nav1_id, nav1_rad;
         uint8_t nav2_on, nav2_id, nav2_rad;
@@ -69,7 +72,13 @@ class FS200AC {
         uint8_t throttle, prop_rpm, fuel_mixture;
         // console version
         uint8_t major_version, minor_version;
-    } __attribute__((__packed__));
+    }
+    #ifdef _MSC_VER
+    #pragma pack(pop)
+    #else
+    __attribute__((__packed__))
+    #endif
+    ;
 
     private:
     static const ConsoleState DEFAULT_INITIAL_STATE;
